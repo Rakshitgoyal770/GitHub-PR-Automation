@@ -1,4 +1,3 @@
-
 # GitHub-PR-Automation
 # AI-Powered PR Review Bot
 
@@ -91,5 +90,25 @@ GITHUB_APP_ID=your_app_id
 GITHUB_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
-s over time
+Run with Docker Compose:
+```bash
+docker-compose up --build
+```
+
+Expose your local server with ngrok and point your GitHub App's webhook URL at `https://your-ngrok-url/webhook`.
+
+## Known limitations & next steps
+
+Being upfront about where this stands:
+
+- **Currently runs on a local LLM (Ollama)** for development — this keeps testing free and fast, but means the bot isn't deployed 24/7 yet, since most free cloud hosts can't run a local model. Next step: swap in a hosted API (Groq's free tier, or Gemini once billing is configured) for full cloud deployment.
+- **Reviews are diff-scoped**, not full-repository — the bot sees changed lines plus surrounding context, not the entire codebase. This catches most local issues but can miss cross-file problems (e.g., a changed function signature breaking a caller elsewhere).
+- **Comments are general PR comments**, not inline on specific diff lines yet — a planned upgrade using GitHub's review comment API with diff position mapping.
+- **Model quality is a tunable dial** — currently using `qwen2.5-coder`, swappable for a larger or hosted model without touching the rest of the architecture.
+
+## What I'd build next
+
+1. Cloud deployment with a hosted LLM API
+2. Inline comments mapped to exact diff positions
+3. Persistent review history (MongoDB) with aggregate stats — issues caught, most-flagged files, trends over time
 4. AI-suggested fixes (actual corrected code, not just flagged issues) alongside each comment
