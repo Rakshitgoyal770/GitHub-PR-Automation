@@ -112,3 +112,5 @@ Being upfront about where this stands:
 2. Inline comments mapped to exact diff positions
 3. Persistent review history (MongoDB) with aggregate stats — issues caught, most-flagged files, trends over time
 4. AI-suggested fixes (actual corrected code, not just flagged issues) alongside each comment
+
+<img width="953" height="211" alt="image" src="https://github.com/user-attachments/assets/e9165360-a744-449a-85ae-4a757fb3d738" />
